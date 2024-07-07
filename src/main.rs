@@ -14,8 +14,6 @@ fn main() -> Result<(), eframe::Error> {
 
     let Some(command) = args.next() else { help(None) };
 
-    println!("{}", command);
-
     match command.as_str() {
         "open" => open(args.next().expect("Expected configuration file path. See `erun help` for more details.")),
         "help" => help(args.next()),
@@ -60,8 +58,8 @@ See `erun help [COMMAND]` for more information on a specific command.
 }
 
 fn example(example: String) {
-    let runner_string = " \
-title: \"erun\"),
+    let runner_string = "\
+title: \"erun\",
 content: Frame {
     padding: Even(Unit(5.0)),
     margin: Even(Unit(5.0)),
