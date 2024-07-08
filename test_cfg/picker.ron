@@ -1,0 +1,7 @@
+(
+    content: AppList(
+        exit_after_selection: true,
+        run_command: "echo",
+        bridge_stdout: true,
+    ),
+)

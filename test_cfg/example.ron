@@ -1,0 +1,10 @@
+(
+    content: Frame(
+        padding: Even(Unit(5.0)),
+        margin: Even(Unit(5.0)),
+        subcomponent: AppList(
+            show_icons: true,
+            exit_after_selection: true,
+        ),
+    ),
+)

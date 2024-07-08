@@ -1,0 +1,10 @@
+Widget-Based Launcher, Menu, and Bar
+
+Usage: erun [COMMAND] [ARGS]
+
+Commands:
+    open [FILE]       Opens a window by loading the specified configuration file
+    help [COMMAND?]   Displays the help message for a specific command or this message if unspecified
+    example [TYPE?]    Prints an example Window config. Currently available: runner (default), full
+
+See `erun help [COMMAND]` for more information on a specific command.
