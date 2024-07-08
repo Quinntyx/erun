@@ -4,6 +4,7 @@ use std::path::PathBuf;
 
 use icns::IconFamily;
 
+#[allow(unreachable_code, unused_variables)]
 pub fn load_icon_to_uri(path: PathBuf) -> Result<String, anyhow::Error> {
     return Ok("".into());
     if path.extension().is_some_and(|x| x == "icns") {

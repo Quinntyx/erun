@@ -4,18 +4,22 @@ pub mod model;
 pub mod utils;
 
 use app::App;
-use gui::definitions::Window;
-use ron::de;
+use gui::definitions::{Style, Window};
 use ron::extensions::Extensions as ex;
 
 fn main() -> Result<(), eframe::Error> {
     let mut args = std::env::args();
     args.next().expect("This should not crash here...");
 
-    let Some(command) = args.next() else { help(None) };
+    let Some(command) = args.next() else {
+        help(None)
+    };
 
     match command.as_str() {
-        "open" => open(args.next().expect("Expected configuration file path. See `erun help` for more details.")),
+        "open" => open(
+            args.next()
+                .expect("Expected configuration file path. See `erun help` for more details."),
+        ),
         "help" => help(args.next()),
         "example" => example(args.next().unwrap_or_else(|| String::from("runner"))),
         err => print!("Unrecognized command {}.", err),
@@ -25,53 +29,51 @@ fn main() -> Result<(), eframe::Error> {
 }
 
 fn help(command: Option<String>) -> ! {
-    let main_string = 
-" \
-Widget-Based Launcher, Menu, and Bar
-
-Usage: erun [COMMAND] [ARGS]
-
-Commands:
-    open [FILE]       Opens a window by loading the specified configuration file
-    help [COMMAND?]   Displays the help message for a specific command or this message if unspecified
-    example [TYPE?]    Prints an example Window config. Currently available: runner (default)
-
-See `erun help [COMMAND]` for more information on a specific command.
-";
-
-    let open_string = "Help string for `open` has not yet been added.";
-    let help_string = "Help string for `help` has not yet been added.";
-    let example_string = "Help string for `example` has not yet been added.";
-
-    if let Some(command) = command { 
+    if let Some(command) = command {
         match command.as_str() {
-            "open" => print!("{}", open_string),
-            "help" => print!("{}", help_string),
-            "example" => print!("{}", example_string),
-            err => print!("Unrecognized command {}.", err),
+            "open" => println!(include_str!("../text/help_open")),
+            "help" => println!(include_str!("../text/help_help")),
+            "example" => println!(include_str!("../text/help_example")),
+            err => println!("Unrecognized command {}.", err),
         }
     } else {
-        print!("{}", main_string);
+        println!(include_str!("../text/help_main"));
     }
-
     std::process::exit(0)
 }
 
 fn example(example: String) {
     let runner_string = "\
-title: \"erun\",
-content: Frame {
-    padding: Even(Unit(5.0)),
-    margin: Even(Unit(5.0)),
-    subcomponent: AppList {
-        show_icons: true,
-        exit_after_selection: true,
-    },
-},
+Window(
+    title: \"erun\",
+    content: Frame(
+        padding: Even(Unit(5.0)),
+        margin: Even(Unit(5.0)),
+        subcomponent: AppList(
+            show_icons: true,
+            exit_after_selection: true,
+        ),
+    ),
+)
 ";
 
+    let full_string = ron::Options::default()
+        .with_default_extension(ex::IMPLICIT_SOME)
+        .to_string_pretty(
+            &Window {
+                style: Some(Style {
+                    extreme_bg_color: Some(egui::Color32::RED),
+                    ..Style::default()
+                }),
+                ..Default::default()
+            },
+            ron::ser::PrettyConfig::new().indentor(String::from("    ")),
+        )
+        .unwrap();
+
     match example.as_str() {
-        "runner" => eprintln!("{}", runner_string),
+        "runner" => print!("{}", runner_string),
+        "full" => print!("{}", full_string),
         _ => eprintln!(
             "Unrecognized example {}. See `erun help` for more details.",
             runner_string
@@ -81,16 +83,36 @@ content: Frame {
 }
 
 fn open(window_file: String) {
-    let window = ron::Options::default()
+    let window: Window = ron::Options::default()
         .with_default_extension(ex::IMPLICIT_SOME)
-        .from_str(
-            &std::fs::read_to_string(window_file).expect("File should be readable"),
-        ).expect("Config file should be valid");
+        .from_str(&std::fs::read_to_string(window_file).expect("File should be readable"))
+        .expect("Config file should be valid");
 
     let options = eframe::NativeOptions {
+        viewport: egui::ViewportBuilder {
+            fullscreen: window.fullscreen,
+            maximized: window.maximized,
+            resizable: window.resizable,
+            transparent: window.transparent,
+            decorations: window.decorations,
+            title_shown: window.title_shown,
+            titlebar_buttons_shown: window.titlebar_buttons_shown,
+            titlebar_shown: window.titlebar_shown,
+            drag_and_drop: window.drag_and_drop,
+            taskbar: window.taskbar,
+            close_button: window.close_button,
+            minimize_button: window.minimize_button,
+            maximize_button: window.maximize_button,
+            mouse_passthrough: window.mouse_passthrough,
+            active: window.active,
+            visible: window.visible,
+            fullsize_content_view: window.fullsize_content_view,
+            ..Default::default()
+        },
         // initial_window_size: Some(egui::vec2(320.0, 240.0)),
         ..Default::default()
     };
 
-    eframe::run_native("erun", options, Box::new(|cc| App::setup(cc, window))).expect("App should not crash");
+    eframe::run_native("erun", options, Box::new(|cc| App::setup(cc, window)))
+        .expect("App should not crash");
 }
