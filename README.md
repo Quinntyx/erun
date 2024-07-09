@@ -1,6 +1,22 @@
 # erun
 A configurable, component-based launcher, menu, and bar application in Rust.
 
+# Build Instructions
+Dependencies: `cargo`, `rustc`, and `opengl`. 
+
+1. clone the repo (`git clone https://github.com/quinntyx/erun`)
+2. enter the repo (`cd erun`)
+3. build the repo (`cargo build --release`)
+4. copy `target/release/erun` to `/usr/bin` (or your other place of choice)
+
+All in one: 
+```sh
+git clone https://github.com/quinntyx/erun
+cd erun
+cargo build --release
+cp target/release/erun /usr/bin
+```
+
 # Why
 I really like eww. However, as I used it, I found it somewhat lacking, for a few reasons:
 1. EWW uses GTK. Gradience has recently been discontinued for GTK, and I'm not too
