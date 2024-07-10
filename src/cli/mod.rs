@@ -14,6 +14,7 @@ pub enum FileFormat {
     #[strum(serialize = "json")]
     Json,
     // hjson,
-    // yaml,
+    #[strum(serialize = "yaml")]
+    Yaml,
     // toml
 }

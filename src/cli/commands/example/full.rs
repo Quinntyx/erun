@@ -21,6 +21,7 @@ pub fn full(mut args: std::env::Args) {
         Ron => ron,
         Kdl => kdl,
         Json => json,
+        Yaml => yaml,
     })(window);
 }
 
@@ -43,5 +44,10 @@ fn kdl(window: &Window) {
 
 fn json(window: &Window) {
     let full_string = serde_json::to_string_pretty(window).unwrap();
+    println!("{}", full_string);
+}
+
+fn yaml(window: &Window) {
+    let full_string = serde_yml::to_string(window).unwrap();
     println!("{}", full_string);
 }

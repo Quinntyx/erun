@@ -30,6 +30,7 @@ pub fn runner(mut args: std::env::Args) {
         Ron => ron,
         Kdl => kdl,
         Json => json,
+        Yaml => yaml,
     })(window);
 }
 
@@ -52,5 +53,10 @@ fn kdl(window: &Window) {
 
 fn json(window: &Window) {
     let runner_string = serde_json::to_string_pretty(window).unwrap();
+    println!("{}", runner_string);
+}
+
+fn yaml(window: &Window) {
+    let runner_string = serde_yml::to_string(window).unwrap();
     println!("{}", runner_string);
 }

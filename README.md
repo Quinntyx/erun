@@ -61,7 +61,7 @@ These formats are currently planned to have first-class support prior to 1.0:
 - [ ] kdl (Cuddly Data Language)
 - [x] json
     - [ ] Hjson (Human json)
-- [ ] yaml
+- [x] yaml
 - [ ] toml
 
 # Performance
@@ -126,7 +126,7 @@ degradation can be seen as a fault of the tool itself.
     - [ ] kdl support
     - [x] json support
         - [ ] Hjson support
-    - [ ] yaml support
+    - [x] yaml support
     - [ ] toml support
     - [ ] components
         - [ ] Image
