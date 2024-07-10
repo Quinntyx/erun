@@ -9,8 +9,10 @@ pub enum FileFormat {
     Infer,
     #[strum(serialize = "ron")]
     Ron,
-    // kdl,
-    // json,
+    #[strum(serialize = "kdl")]
+    Kdl,
+    #[strum(serialize = "json")]
+    Json,
     // hjson,
     // yaml,
     // toml

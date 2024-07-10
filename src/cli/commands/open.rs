@@ -16,13 +16,16 @@ pub fn open(mut args: std::env::Args) {
 
     if matches!(format, Infer) {
         // TODO: real inference
+
         format = Ron;
     }
 
     let window = match format {
         Infer => unreachable!(),
-        Ron => ron(window_file),
-    };
+        Ron => ron,
+        Kdl => kdl,
+        Json => json,
+    }(window_file);
     
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder {
@@ -58,4 +61,13 @@ fn ron(window_file: String) -> Window {
         .with_default_extension(ex::IMPLICIT_SOME)
         .from_str(&std::fs::read_to_string(window_file).expect("File should be readable"))
         .expect("Config file should be valid")
+}
+
+#[allow(unused_variables)]
+fn kdl(window_file: String) -> Window {
+    todo!("KDL Support is not yet implemented.");
+}
+
+fn json(window_file: String) -> Window {
+    serde_json::from_str(&std::fs::read_to_string(window_file).expect("File should be readable")).expect("Config file should be valid")
 }

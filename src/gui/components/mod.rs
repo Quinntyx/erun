@@ -4,12 +4,15 @@ pub mod list;
 
 use egui::Ui;
 use serde::{Deserialize, Serialize};
+// TODO: implement kdl support
+// use knuffel::Decode;
 
 use crate::gui::primitives::dimensions::*;
 use crate::model::context::Context;
 use list::providers::ListContentProvider;
 
 #[derive(Serialize, Deserialize, Clone, Debug, Default)]
+// #[derive(Decode)] // Knuffel, for KDL
 pub enum Component {
     #[default]
     Empty,

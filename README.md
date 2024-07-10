@@ -59,7 +59,7 @@ maximum flexibility and ease of use.
 These formats are currently planned to have first-class support prior to 1.0: 
 - [x] ron (Rusty Object Notation)
 - [ ] kdl (Cuddly Data Language)
-- [ ] json
+- [x] json
     - [ ] Hjson (Human json)
 - [ ] yaml
 - [ ] toml
@@ -124,7 +124,7 @@ degradation can be seen as a fault of the tool itself.
     - [x] make everything `#[serde(default)]` to clean up config format
     - [x] ron support
     - [ ] kdl support
-    - [ ] json support
+    - [x] json support
         - [ ] Hjson support
     - [ ] yaml support
     - [ ] toml support
