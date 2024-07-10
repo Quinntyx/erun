@@ -16,6 +16,3 @@ icns = { version = "0.3.1" }
 anyhow = "1.0.86"
 ron = "0.8.1"
 strum = { version = "0.26.3", features = ["derive"] }
-
-[profile.release]
-debug = true
