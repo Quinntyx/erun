@@ -27,7 +27,7 @@ pub fn open(mut args: std::env::Args) {
         Json => json,
         Yaml => yaml,
     }(window_file);
-    
+
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder {
             fullscreen: window.fullscreen,
@@ -70,9 +70,11 @@ fn kdl(window_file: String) -> Window {
 }
 
 fn json(window_file: String) -> Window {
-    serde_json::from_str(&std::fs::read_to_string(window_file).expect("File should be readable")).expect("Config file should be valid")
+    serde_json::from_str(&std::fs::read_to_string(window_file).expect("File should be readable"))
+        .expect("Config file should be valid")
 }
 
 fn yaml(window_file: String) -> Window {
-    serde_yml::from_str(&std::fs::read_to_string(window_file).expect("File should be readable")).expect("Config file should be valid")
+    serde_yml::from_str(&std::fs::read_to_string(window_file).expect("File should be readable"))
+        .expect("Config file should be valid")
 }

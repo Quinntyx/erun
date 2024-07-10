@@ -1,8 +1,6 @@
 pub mod full;
 pub mod runner;
 
-
-
 pub fn example(mut args: std::env::Args) {
     let example = args.next().unwrap_or_else(|| String::from("runner"));
     match example.as_str() {
@@ -15,5 +13,3 @@ pub fn example(mut args: std::env::Args) {
     }
     std::process::exit(0)
 }
-
-

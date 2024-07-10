@@ -6,17 +6,18 @@ use crate::gui::windows::Window;
 
 pub fn full(mut args: std::env::Args) {
     use FileFormat::*;
-    let window = 
-            &Window {
-                style: Some(Style {
-                    extreme_bg_color: Some(egui::Color32::RED),
-                    ..Style::default()
-                }),
-                ..Default::default()
-            };
+    let window = &Window {
+        style: Some(Style {
+            extreme_bg_color: Some(egui::Color32::RED),
+            ..Style::default()
+        }),
+        ..Default::default()
+    };
 
     //TODO: Implement the smart, see runner.rs
-    (match FileFormat::try_from(args.next().unwrap_or(String::from("ron")).as_ref()).expect("File format should be one of `ron`, `kdl`") {
+    (match FileFormat::try_from(args.next().unwrap_or(String::from("ron")).as_ref())
+        .expect("File format should be one of `ron`, `kdl`")
+    {
         Infer => unreachable!(),
         Ron => ron,
         Kdl => kdl,

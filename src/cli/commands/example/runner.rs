@@ -7,23 +7,23 @@ use crate::gui::windows::Window;
 
 pub fn runner(mut args: std::env::Args) {
     use FileFormat::*;
-    let window =  
-            &Window {
-                content: Some(List {
-                    content: Some(Applications),
-                    show_icons: None,
-                    exit_after_selection: None,
-                    run_command: None,
-                    extra_arguments: vec![],
-                    bridge_stdin: None,
-                    bridge_stdout: None,
-                    bridge_stderr: None,
-                }),
-                ..Default::default()
-            };
+    let window = &Window {
+        content: Some(List {
+            content: Some(Applications),
+            show_icons: None,
+            exit_after_selection: None,
+            run_command: None,
+            extra_arguments: vec![],
+            bridge_stdin: None,
+            bridge_stdout: None,
+            bridge_stderr: None,
+        }),
+        ..Default::default()
+    };
 
     // TODO: look at ~/.config and . to determine most likely preferred format
-    let next = FileFormat::try_from(args.next().unwrap_or(String::from("ron")).as_ref()).expect("Format should be one of `ron`, `kdl`.");
+    let next = FileFormat::try_from(args.next().unwrap_or(String::from("ron")).as_ref())
+        .expect("Format should be one of `ron`, `kdl`.");
 
     (match next {
         Infer => unreachable!(),
