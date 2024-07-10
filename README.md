@@ -2,7 +2,8 @@
 A configurable, component-based launcher, menu, and bar application in Rust.
 
 # Build Instructions
-Dependencies: `cargo`, `rustc`, and `opengl`. 
+System Dependencies: `cargo`, `rustc`, and `opengl`. 
+Crate Dependencies (autodownloaded): `applications`, `eframe`, `egui`, `serde`, `icns`, `anyhow`, `ron`, and `strum`.
 
 1. clone the repo (`git clone https://github.com/quinntyx/erun`)
 2. enter the repo (`cd erun`)
