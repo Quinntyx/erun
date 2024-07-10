@@ -1,6 +1,6 @@
 use eframe::CreationContext;
 
-use crate::gui::definitions::*;
+use crate::gui::windows::Window;
 use crate::model::context::Context;
 
 pub struct App {

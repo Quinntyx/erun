@@ -1,5 +1,5 @@
 (
-    content: AppList(
+    content: List(
         exit_after_selection: true,
         run_command: "echo",
         bridge_stdout: true,

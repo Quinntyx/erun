@@ -127,7 +127,7 @@ degradation can be seen as a fault of the tool itself.
         - [ ] Hjson support
     - [ ] yaml support
     - [ ] toml support
-    - [ ] elements
+    - [ ] components
         - [ ] Image
             - [ ] Actually Show an image instead of crashing with a `todo!()`
             - [ ] cache web URIs on local disk and convert from `http` or `https` URIs to `bytes` URIs for performance (maybe a flag?)
@@ -143,8 +143,9 @@ degradation can be seen as a fault of the tool itself.
         - [ ] Button
         - [x] List
             - [ ] Filter search
+            - [x] search box (currently useless)
             - [ ] pass filter box content to ListProvider for custom behavior
-            - [ ] smooth scrolling
+            - [x] smooth scrolling
             - [ ] pagenation / multi column layout
             - [x] ListProvider
                 - [x] ListProvider::Applications for system apps

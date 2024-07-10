@@ -4,7 +4,8 @@ pub mod model;
 pub mod utils;
 
 use app::App;
-use gui::definitions::{Style, Window};
+use gui::config::Style;
+use gui::windows::Window;
 use ron::extensions::Extensions as ex;
 
 fn main() -> Result<(), eframe::Error> {
@@ -43,6 +44,8 @@ fn help(command: Option<String>) -> ! {
 }
 
 fn example(example: String) {
+    use crate::gui::components::Component::*;
+    use crate::gui::components::list::providers::ListContentProvider::*;
     let runner_string = "\
 Window(
     title: \"erun\",
@@ -56,6 +59,25 @@ Window(
     ),
 )
 ";
+
+    let runner_string = ron::Options::default()
+        .with_default_extension(ex::IMPLICIT_SOME)
+        .to_string_pretty(
+            &Window {
+                content: Some(List {
+                    content: Some(Applications),
+                    show_icons: None,
+                    exit_after_selection: None,
+                    run_command: None,
+                    extra_arguments: vec![],
+                    bridge_stdin: None,
+                    bridge_stdout: None,
+                    bridge_stderr: None,
+                }),
+                ..Default::default()
+            },
+            ron::ser::PrettyConfig::new().indentor(String::from("    ")),
+        ).unwrap();
 
     let full_string = ron::Options::default()
         .with_default_extension(ex::IMPLICIT_SOME)
