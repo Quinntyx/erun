@@ -16,5 +16,15 @@ pub enum FileFormat {
     // hjson,
     #[strum(serialize = "yaml")]
     Yaml,
-    // toml
+    #[strum(serialize = "toml")]
+    Toml,
+    #[strum(serialize = "sexpr")]
+    SExpression,
+    #[strum(serialize = "url")]
+    Url,
+    // TODO: implement csv support (?)
+    // #[strum(serialize = "csv")]
+    // Csv,
+    #[strum(serialize = "xml")]
+    Xml,
 }

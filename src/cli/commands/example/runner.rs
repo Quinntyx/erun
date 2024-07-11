@@ -31,6 +31,11 @@ pub fn runner(mut args: std::env::Args) {
         Kdl => kdl,
         Json => json,
         Yaml => yaml,
+        Toml => toml,
+        SExpression => sexpression,
+        Url => url,
+        Xml => xml,
+        // Csv => csv,
     })(window);
 }
 
@@ -59,4 +64,29 @@ fn json(window: &Window) {
 fn yaml(window: &Window) {
     let runner_string = serde_yml::to_string(window).unwrap();
     println!("{}", runner_string);
+}
+
+fn toml(window: &Window) {
+    let string = toml::to_string(window).unwrap();
+    println!("{}", string);
+}
+
+fn sexpression(window: &Window) {
+    let string = serde_lexpr::to_string(window).unwrap();
+    println!("{}", string);
+}
+
+fn url(window: &Window) {
+    let string = serde_qs::to_string(window).unwrap();
+    println!("{}", string);
+}
+
+// fn csv(window: &Window) {
+//     let mut wtr = csv::Writer::from_writer(std::io::stdout());
+//     wtr.serialize(window).unwrap();
+// }
+
+fn xml(window: &Window) {
+    let string = crate::utils::format_xml(serde_xml_rs::to_string(window).unwrap());
+    println!("{}", string);
 }

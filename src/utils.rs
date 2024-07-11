@@ -26,3 +26,24 @@ pub fn load_icon_to_uri(path: PathBuf) -> Result<String, anyhow::Error> {
         ))
     }
 }
+
+use xml::{reader::ParserConfig, writer::EmitterConfig};
+
+pub fn format_xml(src: String) -> String {
+    let mut dest = Vec::new();
+    let reader = ParserConfig::new()
+        .trim_whitespace(true)
+        .ignore_comments(false)
+        .create_reader(src.as_bytes());
+    let mut writer = EmitterConfig::new()
+        .perform_indent(true)
+        .normalize_empty_elements(false)
+        .autopad_comments(false)
+        .create_writer(&mut dest);
+    for event in reader {
+        if let Some(event) = event.unwrap().as_writer_event() {
+            writer.write(event).unwrap();
+        }
+    }
+    String::from_utf8(dest).unwrap()
+}

@@ -1,7 +1,7 @@
 (
     content: Frame(
         padding: Even("50pt"),
-        // margin: Even("5pt"),
+        margin: Even("5pt"),
         content: List(
             show_icons: true,
             exit_after_selection: true,

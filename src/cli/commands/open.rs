@@ -26,6 +26,11 @@ pub fn open(mut args: std::env::Args) {
         Kdl => kdl,
         Json => json,
         Yaml => yaml,
+        Toml => toml,
+        SExpression => sexpression,
+        Url => url,
+        Xml => xml,
+        // Csv => csv,
     }(window_file);
 
     let options = eframe::NativeOptions {
@@ -76,5 +81,34 @@ fn json(window_file: String) -> Window {
 
 fn yaml(window_file: String) -> Window {
     serde_yml::from_str(&std::fs::read_to_string(window_file).expect("File should be readable"))
+        .expect("Config file should be valid")
+}
+
+fn toml(window_file: String) -> Window {
+    toml::from_str(&std::fs::read_to_string(window_file).expect("File should be readable"))
+        .expect("Config file should be valid")
+}
+
+fn sexpression(window_file: String) -> Window {
+    serde_lexpr::from_str(&std::fs::read_to_string(window_file).expect("File should be readable"))
+        .expect("Config file should be valid")
+}
+
+fn url(window_file: String) -> Window {
+    serde_qs::from_str(&std::fs::read_to_string(window_file).expect("File should be readable"))
+        .expect("Config file should be valid")
+}
+
+// fn csv(window_file: String) -> Window {
+//     csv::Reader::from_path(window_file)
+//         .expect("File should be readable")
+//         .deserialize()
+//         .next()
+//         .expect("Should contain an entry")
+//         .expect("Config file should be valid")
+// }
+
+fn xml(window_file: String) -> Window {
+    serde_xml_rs::from_str(&std::fs::read_to_string(window_file).expect("file should be readable"))
         .expect("Config file should be valid")
 }
