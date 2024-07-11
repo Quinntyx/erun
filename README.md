@@ -62,7 +62,7 @@ These formats are currently planned to have first-class support prior to 1.0:
 - [x] json
     - [ ] Hjson (Human json)
 - [x] yaml
-- [ ] toml
+- [x] toml
 
 # Performance
 I haven't run any benchmarks, as the software is in extremely early development at the
@@ -127,7 +127,11 @@ degradation can be seen as a fault of the tool itself.
     - [x] json support
         - [ ] Hjson support
     - [x] yaml support
-    - [ ] toml support
+    - [x] toml support
+    - [x] s-expression (lisp) support
+    - [x] url encoding support
+    - [x] xml support
+        - [ ] make xml support better, it's cursed asf rn
     - [ ] components
         - [ ] Image
             - [ ] Actually Show an image instead of crashing with a `todo!()`
