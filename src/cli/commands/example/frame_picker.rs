@@ -3,6 +3,9 @@ use ron::extensions::Extensions as ex;
 use crate::cli::FileFormat;
 use crate::gui::windows::Window;
 
+/// 
+///
+/// * `args`: 
 pub fn frame_picker(mut args: std::env::Args) {
     use FileFormat::*;
     let window = &ron::Options::default()

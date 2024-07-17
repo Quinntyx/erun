@@ -3,12 +3,19 @@ use eframe::CreationContext;
 use crate::gui::windows::Window;
 use crate::model::context::Context;
 
+/// The main application struct for `erun`. 
+///
+/// * `ctx`: The application context. 
+/// * `layout`: The loaded Window layout currently being displayed in this window. 
 pub struct App {
     ctx: Context,
     layout: Window,
 }
 
 impl App {
+    /// Constructor. 
+    ///
+    /// * `layout`: The layout of the window to construct the App with. 
     pub fn new(layout: Window) -> Self {
         Self {
             ctx: Context::new(),
@@ -16,6 +23,10 @@ impl App {
         }
     }
 
+    /// Setup function. Called in main and passed to eframe::run_native. 
+    ///
+    /// * `cc`: 
+    /// * `window`: 
     pub fn setup(cc: &CreationContext, window: Window) -> Box<dyn eframe::App> {
         if let Some(style) = &window.style {
             let estyle: egui::Style = style.clone().into();
@@ -30,6 +41,10 @@ impl App {
 }
 
 impl eframe::App for App {
+    /// Implementation of update. 
+    ///
+    /// * `ctx`: egui Context. 
+    /// * `_frame`: eframe Frame. Unused. 
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         let app_ctx = &mut self.ctx;
 

@@ -1,6 +1,6 @@
+pub mod frame_picker;
 pub mod full;
 pub mod runner;
-pub mod frame_picker;
 
 pub fn example(mut args: std::env::Args) {
     let example = args.next().unwrap_or_else(|| String::from("runner"));
